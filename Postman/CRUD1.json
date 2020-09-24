@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "15e93a98-934e-454b-98b9-9bb83892babb",
+		"name": "CRUD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post user ",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "29c319f1-a44b-4829-932d-8e1effe50f2a",
+						"exec": [
+							"const uuid = require('uuid')\r",
+							"postman.setEnvironmentVariable('userId', 'eu-west-1:' + uuid());\r",
+							"console.log('userId:' + postman.getEnvironmentVariable('userId'))"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e59ace64-7651-4560-8115-7872001810e0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n            \"userId\": \"{{userId}}\",\r\n            \"ssn\": \"198106280327\",\r\n            \"isPEP\": false,\r\n            \"isUSCitizen\": false,\r\n            \"countryOfResidence\": \"SE\",\r\n            \"firstName\": \"Bin\",\r\n            \"lastName\": \"Tester\",\r\n            \"street\": \"Björkstigen 12\",\r\n            \"city\": \"Bjurås\",\r\n            \"postalNumber\": \"12345\",\r\n            \"salary\": 80000,\r\n            \"birthYear\": null,\r\n          \r\n            \"advisory\": null,\r\n            \"createdAt\": \"2019-11-11T16:07:17.000Z\",\r\n            \"updatedAt\": \"2019-11-11T16:07:18.000Z\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl_User}}/user",
+					"host": [
+						"{{baseUrl_User}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user after Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "add0ab99-5511-4477-b341-9a2529265b53",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl_User}}/user/{{userId}}",
+					"host": [
+						"{{baseUrl_User}}"
+					],
+					"path": [
+						"user",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put user ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "44b46b1e-d3af-48f5-8c6c-5a0497713502",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n            \"userId\": \"{{userId}}\",\r\n            \"ssn\": \"198106280327\",\r\n            \"isPEP\": false,\r\n            \"isUSCitizen\": false,\r\n            \"countryOfResidence\": \"SE\",\r\n            \"firstName\": \"BinKalIs\",\r\n            \"lastName\": \"Tester\",\r\n            \"street\": \"Björkstigen 12\",\r\n            \"city\": \"Bjurås\",\r\n            \"postalNumber\": \"{{updatePostalNumber}}\",\r\n            \"salary\": 80000,\r\n            \"birthYear\": null,\r\n          \r\n            \"advisory\": null,\r\n            \"createdAt\": \"2019-11-11T16:07:17.000Z\",\r\n            \"updatedAt\": \"2019-11-11T16:07:18.000Z\"\r\n        }"
+				},
+				"url": {
+					"raw": "{{baseUrl_User}}/user",
+					"host": [
+						"{{baseUrl_User}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user after PUT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "96aa8015-894d-4118-824c-b910d706dbdf",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl_User}}/user/{{userId}}",
+					"host": [
+						"{{baseUrl_User}}"
+					],
+					"path": [
+						"user",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "41d6f6a2-a894-4ca1-b040-4208e3919880",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response to be: 1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.response).to.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl_User}}/user/{{userId}}",
+					"host": [
+						"{{baseUrl_User}}"
+					],
+					"path": [
+						"user",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user After Delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "166e4bfa-9286-4f4c-ad7c-06deaac819c0",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl_User}}/user/{{userId}}",
+					"host": [
+						"{{baseUrl_User}}"
+					],
+					"path": [
+						"user",
+						"{{userId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
