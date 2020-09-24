@@ -3,6 +3,8 @@ public void launchbrowser() {
 		driver = new FirefoxDriver();
 		driver.get("https://www.elgiganten.se/");
 		//driver.get("https://c70c70323be7.ngrok.io/");
+
+		//driver.get("https://c70c70323be7.ngrok.io_Welcome");
 	}
 	
 	public void searchProduct() throws InterruptedException {
